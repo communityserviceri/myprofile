@@ -52,7 +52,8 @@
 
         /* Add scroll-padding-top to html for smooth scrolling to anchor links */
         html {
-            scroll-padding-top: 5rem; /* Adjust this value based on your navbar's height */
+            /* scroll-padding-top akan diatur oleh JavaScript */
+            scroll-padding-top: 0; /* Atur default ke 0, JS akan menimpa */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -189,7 +190,7 @@
             border-bottom-left-radius: 50px; /* Rounded corners */
             border-bottom-right-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Stronger shadow */
-            margin-top: 0; /* Add margin-top to push it down from fixed navbar */
+            margin-top: 0; /* Pastikan tidak ada margin-top default */
         }
         
         .animated-header::before {
@@ -590,164 +591,92 @@
                 margin-left: 1rem;
                 gap: 0.6rem;
             }
-            html {
-                scroll-padding-top: 5rem; /* Keep consistent for desktop/tablet */
-            }
-            .animated-header {
-                margin-top: 0; /* Keep consistent for desktop/tablet */
-            }
+            /* Hapus scroll-padding-top dan margin-top di sini */
         }
 
         @media (max-width: 768px) {
-    html { scroll-padding-top: 5rem; }
-    .animated-header { margin-top: 5rem; padding: 4rem 1rem 2rem; }
-    .profile-pic { width: 120px; height: 120px; margin-bottom: 1rem; }
-    .title-animate { font-size: 2rem; }
-    .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
-    section { padding: 2rem 1rem; margin: 1rem auto; }
-    .social-links { gap: 1rem; }
-    .social-links a { font-size: 1.4rem; }
-    
-            html {
-                scroll-padding-top: 10rem; /* Adjust for mobile navbar height */
-            }
+            /* Perbaikan Navbar Mobile */
+            /* Hapus scroll-padding-top dan margin-top di sini */
             .animated-header {
-                margin-top: 10rem; /* Adjust for mobile navbar height */
-                padding: 6rem 1.5rem 3rem;
+                padding: 4rem 1rem 2rem; /* Sedikit kurangi padding header */
                 border-bottom-left-radius: 30px;
                 border-bottom-right-radius: 30px;
             }
 
             .main-nav {
-                flex-direction: column; /* Stack items vertically */
-                padding: 0.75rem 1rem; /* Reduced horizontal padding */
-                align-items: stretch; /* Stretch to fill width */
+                flex-direction: column; /* Tumpuk item secara vertikal */
+                padding: 0.5rem 1rem; /* Kurangi padding horizontal */
+                align-items: stretch; /* Regangkan untuk mengisi lebar */
             }
             .nav-links-grid {
-                grid-template-columns: repeat(3, 1fr); /* 3 columns on smaller screens */
-                gap: 0.5rem;
-                margin-bottom: 0.75rem; /* Space between nav links and controls */
+                grid-template-columns: repeat(3, 1fr); /* 3 kolom pada layar yang lebih kecil */
+                gap: 0.4rem; /* Kurangi jarak antar item */
+                margin-bottom: 0.5rem; /* Beri sedikit ruang di bawah tautan navigasi */
             }
             .nav-links-grid a {
-                font-size: 0.85rem;
-                padding: 0.5rem 0.4rem;
+                font-size: 0.8rem; /* Ukuran font lebih kecil */
+                padding: 0.4rem 0.3rem; /* Padding lebih kecil */
             }
             .nav-controls {
-                position: static; /* Allow controls to flow naturally */
-                margin-top: 0.5rem; /* Space from nav links */
-                justify-content: center;
-                width: 100%;
-                right: auto; /* Remove fixed right position */
-                gap: 0.8rem; /* Smaller gap for controls */
+                position: static; /* Biarkan kontrol mengalir secara alami */
+                margin-top: 0.5rem; /* Ruang dari tautan navigasi */
+                justify-content: center; /* Pusatkan kontrol */
+                width: 100%; /* Ambil lebar penuh */
+                right: auto; /* Hapus posisi kanan tetap */
+                gap: 0.6rem; /* Jarak yang lebih kecil untuk kontrol */
             }
             .language-switcher select,
             .theme-toggle button {
-                padding: 0.4rem 0.8rem; /* Smaller padding for controls */
-                font-size: 0.85rem;
+                padding: 0.3rem 0.7rem; /* Padding lebih kecil untuk kontrol */
+                font-size: 0.8rem; /* Ukuran font lebih kecil */
             }
 
-            .profile-pic {
-                width: 140px;
-                height: 140px;
-                margin-bottom: 1.5rem;
-            }
-            .title-animate {
-                font-size: 2.5rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 2rem;
-            }
-            .social-links {
-                gap: 1.5rem;
-            }
-            .social-links a {
-                font-size: 1.5rem;
-            }
-
-            section {
-                padding: 3rem 1.5rem;
-                margin: 1.5rem auto;
-                border-radius: 8px;
-            }
-            h2 {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-            h2::after {
-                width: 50%;
-                height: 4px;
-                bottom: -10px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .project-card img {
-                height: 180px;
-            }
-            .project-card h3 {
-                font-size: 1.4rem;
-            }
-            .project-card p {
-                font-size: 0.9rem;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            .animated-footer {
-                padding: 2rem;
-                margin-top: 3rem;
-                border-top-left-radius: 30px;
-                border-top-right-radius: 30px;
-            }
-            #scrollTopBtn {
-                width: 45px;
-                height: 45px;
-                font-size: 1.4rem;
-                bottom: 1.5rem;
-                right: 1.5rem;
-            }
-
-            .language-skill-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .language-skill-item .language-name {
-                margin-bottom: 0.5rem;
-            }
+            /* Penyesuaian elemen lain untuk mobile */
+            .profile-pic { width: 120px; height: 120px; margin-bottom: 1rem; }
+            .title-animate { font-size: 2rem; }
+            .subtitle { font-size: 1rem; margin-bottom: 1.5rem; }
+            section { padding: 2rem 1rem; margin: 1rem auto; border-radius: 8px; }
+            .social-links { gap: 1rem; }
+            .social-links a { font-size: 1.4rem; }
+            h2 { font-size: 2rem; margin-bottom: 2rem; }
+            h2::after { width: 50%; height: 4px; bottom: -10px; }
+            .projects-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .project-card img { height: 180px; }
+            .project-card h3 { font-size: 1.4rem; }
+            .project-card p { font-size: 0.9rem; }
+            .contact-info { flex-direction: column; gap: 0.8rem; }
+            .animated-footer { padding: 2rem; margin-top: 3rem; border-top-left-radius: 30px; border-top-right-radius: 30px; }
+            #scrollTopBtn { width: 45px; height: 45px; font-size: 1.4rem; bottom: 1.5rem; right: 1.5rem; }
+            .language-skill-item { flex-direction: column; align-items: flex-start; }
+            .language-skill-item .language-name { margin-bottom: 0.5rem; }
         }
 
         @media (max-width: 480px) {
-            html {
-                scroll-padding-top: 10rem; /* Keep consistent for very small screens too */
-            }
+            /* Penyesuaian lebih lanjut untuk layar sangat kecil */
+            /* Hapus scroll-padding-top dan margin-top di sini */
             .animated-header {
-                margin-top: 10rem; /* Keep consistent for very small screens too */
+                padding: 3rem 0.8rem 1.5rem; /* Kurangi padding header lebih lanjut */
             }
 
             .main-nav {
-                padding: 0.6rem 0.5rem; /* Even smaller padding */
+                padding: 0.4rem 0.5rem; /* Even smaller padding */
             }
             .nav-links-grid {
                 grid-template-columns: repeat(2, 1fr); /* 2 columns on very small screens */
-                gap: 0.4rem;
+                gap: 0.3rem; /* Jarak yang lebih kecil */
             }
             .nav-links-grid a {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.3rem;
+                font-size: 0.7rem; /* Ukuran font terkecil */
+                padding: 0.3rem 0.2rem; /* Padding terkecil */
             }
             .nav-controls {
                 flex-direction: row; /* Keep controls in a row if space allows */
-                gap: 0.5rem;
+                gap: 0.4rem; /* Jarak yang lebih kecil */
             }
             .language-switcher select,
             .theme-toggle button {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.8rem;
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -1230,6 +1159,13 @@
     const mainNav = document.querySelector('.main-nav'); // Get the navbar element
     let lastScrollY = window.scrollY; // To store the last scroll position
 
+    // Function to adjust scroll-padding-top based on navbar height
+    function adjustHeaderPadding() {
+        const navbarHeight = mainNav.offsetHeight;
+        document.documentElement.style.scrollPaddingTop = `${navbarHeight}px`;
+        // Hapus baris yang mengatur margin-top pada .animated-header
+    }
+
     function setLanguage(lang) {
         document.querySelectorAll('[data-lang-key]').forEach(element => {
             const key = element.getAttribute('data-lang-key');
@@ -1287,13 +1223,21 @@
                 headerParticles.appendChild(particle);
             }
         }
+
+        // Call adjustHeaderPadding initially and on window resize
+        adjustHeaderPadding(); // Initial call
+        window.addEventListener('resize', adjustHeaderPadding); // Adjust on resize
     });
 
     languageSelect.addEventListener('change', (event) => {
         setLanguage(event.target.value);
+        adjustHeaderPadding(); // Re-adjust after language change (might affect text wrapping/height)
     });
 
-    themeToggleBtn.addEventListener('click', toggleTheme);
+    themeToggleBtn.addEventListener('click', () => {
+        toggleTheme();
+        adjustHeaderPadding(); // Re-adjust after theme change (might affect font rendering/height)
+    });
 
     // --- Smooth scrolling for navigation ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1320,6 +1264,7 @@
             scrollTopBtn.style.opacity = '0'; // Hide it
         }
         handleNavbarVisibility(); // Call navbar visibility function on scroll
+        // Hapus baris adjustHeaderPadding() di sini
     });
 
     scrollTopBtn.addEventListener('click', () => {
