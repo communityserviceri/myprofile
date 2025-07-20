@@ -48,12 +48,11 @@
             overflow-x: hidden;
             font-family: 'Open Sans', sans-serif; /* Body font */
             transition: background-color 0.3s ease, color 0.3s ease;
-            /* padding-top: 5.5rem; REMOVED */
         }
 
         /* Add scroll-padding-top to html for smooth scrolling to anchor links */
         html {
-            scroll-padding-top: 5.5rem; /* Adjust this value based on your navbar's height */
+            scroll-padding-top: 5rem; /* Adjust this value based on your navbar's height */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -73,7 +72,11 @@
             display: flex;
             justify-content: space-between; /* Distribute items: links left, controls right */
             align-items: center;
-            transition: background 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease-out, background 0.3s ease, box-shadow 0.3s ease; /* Added transform for hide/show animation */
+        }
+
+        .main-nav.hidden {
+            transform: translateY(-100%); /* Move navbar completely out of view */
         }
 
         .nav-links-grid {
@@ -186,7 +189,7 @@
             border-bottom-left-radius: 50px; /* Rounded corners */
             border-bottom-right-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Stronger shadow */
-            margin-top: 5.5rem; /* Add margin-top to push it down from fixed navbar */
+            margin-top: 0; /* Add margin-top to push it down from fixed navbar */
         }
         
         .animated-header::before {
@@ -588,17 +591,14 @@
                 gap: 0.6rem;
             }
             html {
-                scroll-padding-top: 5.5rem; /* Keep consistent for desktop/tablet */
+                scroll-padding-top: 5rem; /* Keep consistent for desktop/tablet */
             }
             .animated-header {
-                margin-top: 5.5rem; /* Keep consistent for desktop/tablet */
+                margin-top: 0; /* Keep consistent for desktop/tablet */
             }
         }
 
         @media (max-width: 768px) {
-            body {
-                /* padding-top: 10rem; REMOVED */
-            }
             html {
                 scroll-padding-top: 10rem; /* Adjust for mobile navbar height */
             }
@@ -713,9 +713,6 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                /* padding-top: 10rem; REMOVED */
-            }
             html {
                 scroll-padding-top: 10rem; /* Keep consistent for very small screens too */
             }
@@ -1209,7 +1206,7 @@
             langJapanese: "日本語",
             langSundanese: "スンダ語 (地域)",
             hobbiesTitle: "趣味＆興味",
-            hobbyMotorTitle: "Hobi:",
+            hobbyMotorTitle: "趣味:",
             hobbyMotorDesc: "バイク＆自動車 (細部へのこだわり、機械的問題解決、複雑なシステムの理解を示す)",
             interestTechTitle: "Minat:",
             interestTechDesc: "テクノロジー、科学、自動車 (継続的な学習と革新への適応を促す)",
@@ -1221,6 +1218,8 @@
     const languageSelect = document.getElementById('languageSelect');
     const themeToggleBtn = document.getElementById('themeToggleBtn');
     const body = document.body;
+    const mainNav = document.querySelector('.main-nav'); // Get the navbar element
+    let lastScrollY = window.scrollY; // To store the last scroll position
 
     function setLanguage(lang) {
         document.querySelectorAll('[data-lang-key]').forEach(element => {
@@ -1239,6 +1238,16 @@
         const isDarkMode = body.classList.contains('dark-mode');
         themeToggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }
+
+    // Function to handle navbar hide/show on scroll
+    function handleNavbarVisibility() {
+        if (window.scrollY > lastScrollY && window.scrollY > mainNav.offsetHeight) { // Scrolling down and past navbar height
+            mainNav.classList.add('hidden');
+        } else { // Scrolling up or at the very top
+            mainNav.classList.remove('hidden');
+        }
+        lastScrollY = window.scrollY;
     }
 
     // Initialize language and theme on load
@@ -1301,6 +1310,7 @@
             scrollTopBtn.style.display = 'none';
             scrollTopBtn.style.opacity = '0'; // Hide it
         }
+        handleNavbarVisibility(); // Call navbar visibility function on scroll
     });
 
     scrollTopBtn.addEventListener('click', () => {
