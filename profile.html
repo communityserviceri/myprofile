@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Bima Adhitya Susilo Putra</title>
+    <title data-lang-key="pageTitle">Profil Bima Adhitya Susilo Putra</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts: Poppins for headings, Open Sans for body text -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,8 +17,24 @@
             --accent: #f59e0b; /* Orange/Amber */
             --gray-text: #4a5568; /* Medium gray for paragraphs */
             --border-color: #e2e8f0; /* Light gray for borders */
+            --section-bg: white;
+            --text-color: var(--dark);
+            --heading-color: var(--dark);
+            --link-color: var(--primary);
         }
         
+        /* Dark Mode Variables */
+        body.dark-mode {
+            --light: #1a202c; /* Dark background */
+            --dark: #f8fafc; /* Light text */
+            --gray-text: #cbd5e0; /* Lighter gray for paragraphs */
+            --border-color: #4a5568; /* Darker gray for borders */
+            --section-bg: #2d3748; /* Darker section background */
+            --text-color: var(--dark);
+            --heading-color: var(--dark);
+            --link-color: var(--accent);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -27,69 +43,122 @@
         
         body {
             background-color: var(--light);
-            color: var(--dark);
+            color: var(--text-color);
             line-height: 1.7; /* Increased line height for readability */
             overflow-x: hidden;
             font-family: 'Open Sans', sans-serif; /* Body font */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif; /* Headings font */
-            color: var(--dark);
+            color: var(--heading-color);
         }
         
-        /* Navigation */
+        /* --- Navigation (Revised) --- */
         .main-nav {
-            background: rgba(37, 99, 235, 0.95); /* Slightly less transparent */
-            backdrop-filter: blur(12px); /* Stronger blur */
+            background: rgba(37, 99, 235, 0.95); /* Slightly more opaque for better contrast */
+            backdrop-filter: blur(18px); /* Increased blur for a smoother, frosted glass effect */
             position: fixed;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15); /* Stronger shadow */
-            padding: 0.75rem 0; /* Slightly reduced padding */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Softer, more subtle shadow */
+            padding: 0.75rem 2rem; /* Added horizontal padding for better spacing from edges */
+            display: flex;
+            justify-content: space-between; /* Distribute items: links left, controls right */
+            align-items: center;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
         .main-nav ul {
             display: flex;
-            justify-content: center;
             list-style: none;
-            padding: 0; /* Removed padding as it's on the parent */
+            padding: 0;
+            margin: 0;
+            flex-grow: 1; /* Allow links to take available space */
+            justify-content: flex-start; /* Align links to the left */
         }
-        
+
         .main-nav li {
-            margin: 0 1.2rem; /* Increased margin */
+            margin: 0 1.2rem; /* Consistent spacing */
         }
-        
+
         .main-nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.6rem 1.2rem; /* Adjusted padding */
-            border-radius: 6px; /* Slightly more rounded */
-            transition: all 0.3s ease;
+            padding: 0.6rem 0; /* Padding only top/bottom, width determined by content */
+            transition: all 0.2s ease-out; /* Faster, snappier transition */
             position: relative;
-            font-size: 1.05rem; /* Slightly larger font */
+            font-size: 1.0rem; /* Slightly smaller for a more refined look */
+            letter-spacing: 0.2px; /* Reduced letter spacing */
+            opacity: 0.9; /* Slightly transparent by default */
         }
-        
+
         .main-nav a:hover {
-            background: rgba(255,255,255,0.25); /* Stronger hover effect */
-            transform: translateY(-2px); /* Slight lift on hover */
+            background: none; /* Remove background on hover for cleaner look */
+            transform: translateY(-1px); /* Subtle lift */
+            opacity: 1; /* Fully opaque on hover */
         }
-        
+
         .main-nav a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px; /* Thicker underline */
-            bottom: -5px; /* Lowered underline */
-            left: 50%; /* Center the underline */
+            height: 2px; /* Thinner underline */
+            bottom: -4px; /* Closer to text */
+            left: 50%;
             transform: translateX(-50%);
-            background-color: var(--accent); /* Accent color for underline */
-            transition: width 0.3s ease;
+            background-color: var(--accent);
+            transition: width 0.2s ease-out; /* Faster transition */
         }
-        
+
         .main-nav a:hover::after {
-            width: 80%; /* Wider underline on hover */
+            width: 100%; /* Full width underline on hover */
+        }
+
+        /* Language Switcher & Theme Toggle (Revised) */
+        .nav-controls {
+            display: flex;
+            gap: 0.8rem; /* Reduced gap for compactness */
+            align-items: center;
+            margin-left: 2rem; /* Space from navigation links */
+        }
+
+        .language-switcher select,
+        .theme-toggle button {
+            background-color: rgba(255,255,255,0.1); /* More transparent */
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2); /* Lighter border */
+            padding: 0.4rem 0.7rem; /* Reduced padding for a smaller, sleeker button */
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem; /* Smaller font size */
+            transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease; /* Faster transitions */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22white%22%20d%3D%22M287%2C197.9L159.3%2C69.2c-3.7-3.7-9.7-3.7-13.4%2C0L5.4%2C197.9c-3.7%2C3.7-3.7%2C9.7%2C0%2C13.4l13.4%2C13.4c3.7%2C3.7%2C9.7%2C3.7%2C13.4%2C0l110.7-110.7c3.7-3.7%2C9.7-3.7%2C13.4%2C0l110.7%2C110.7c3.7%2C3.7%2C9.7%2C3.7%2C13.4%2C0l13.4-13.4C290.7%2C207.6%2C290.7%2C201.6%2C287%2C197.9z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 0.6em center; /* Adjusted arrow position */
+            background-size: 0.5em auto; /* Smaller arrow */
+        }
+
+        .language-switcher select:hover,
+        .theme-toggle button:hover {
+            background-color: rgba(255,255,255,0.2); /* Slightly more opaque on hover */
+            border-color: rgba(255,255,255,0.3);
+            transform: translateY(-1px); /* Subtle lift */
+        }
+
+        .language-switcher select option {
+            color: var(--dark); /* Text color for options in light mode */
+            background-color: var(--light); /* Background for options in light mode */
+        }
+
+        body.dark-mode .language-switcher select option {
+            color: var(--light); /* Text color for options in dark mode */
+            background-color: var(--dark); /* Background for options in dark mode */
         }
         
         /* Header */
@@ -181,6 +250,7 @@
             animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.2) both;
             text-shadow: 0 3px 15px rgba(0,0,0,0.3); /* Stronger text shadow */
             font-weight: 700;
+            color: white; /* Make title white */
         }
         
         .subtitle {
@@ -191,6 +261,7 @@
             font-weight: 400; /* Lighter weight */
             letter-spacing: 1.5px; /* More letter spacing */
             text-transform: uppercase;
+            color: white; /* Make subtitle white */
         }
         
         .social-links {
@@ -217,12 +288,12 @@
             padding: 5rem 3rem; /* More padding */
             max-width: 1000px; /* Slightly narrower content for better readability */
             margin: 2rem auto; /* Added top/bottom margin for separation */
-            background-color: white; /* Default background for all sections */
+            background-color: var(--section-bg); /* Default background for all sections */
             border-radius: 12px; /* Rounded corners for sections */
             box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Subtle shadow */
             opacity: 0; 
             transform: translateY(30px); /* More pronounced initial transform */
-            transition: opacity 0.9s ease-out, transform 0.9s ease-out; /* Slower animation */
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out, background-color 0.3s ease, color 0.3s ease; /* Slower animation */
         }
 
         section.animate {
@@ -285,7 +356,7 @@
         }
 
         ul li strong {
-            color: var(--dark); /* Make strong text stand out */
+            color: var(--heading-color); /* Make strong text stand out */
         }
 
         /* Nested lists for experience */
@@ -314,7 +385,7 @@
             border-radius: 10px; /* More rounded */
             overflow: hidden;
             box-shadow: 0 6px 20px rgba(0,0,0,0.1); /* Stronger shadow */
-            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Slower transition */
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.3s ease; /* Slower transition */
             border: 1px solid var(--border-color); /* Subtle border */
         }
         
@@ -366,7 +437,36 @@
             color: var(--gray-text);
             font-size: 0.95rem;
         }
-        
+
+        /* Language Skills Section */
+        .language-skill-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .language-skill-item .language-name {
+            flex: 0 0 120px; /* Fixed width for language name */
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+
+        .language-skill-bar-container {
+            flex-grow: 1;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        .language-skill-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 5px;
+            width: 0%; /* Initial width for animation */
+            transition: width 1s ease-out;
+        }
+
         /* Footer */
         .animated-footer {
             background: var(--dark);
@@ -378,6 +478,7 @@
             border-top-left-radius: 50px; /* Rounded corners */
             border-top-right-radius: 50px;
             box-shadow: 0 -10px 30px rgba(0,0,0,0.2); /* Shadow at the top */
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         .footer-content {
@@ -457,18 +558,50 @@
             }
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .main-nav ul {
-                flex-wrap: wrap;
-                padding: 0.5rem;
-            }
+        /* --- Responsive (Revised) --- */
+        @media (max-width: 992px) { /* Added a new breakpoint for larger tablets */
             .main-nav li {
-                margin: 0.5rem 0.8rem;
+                margin: 0 0.8rem;
             }
             .main-nav a {
                 font-size: 0.95rem;
-                padding: 0.4rem 0.8rem;
+            }
+            .nav-controls {
+                margin-left: 1rem;
+                gap: 0.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                flex-direction: column; /* Stack items vertically */
+                padding: 0.75rem 1rem; /* Reduced horizontal padding */
+                align-items: stretch; /* Stretch to fill width */
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center; /* Center links when wrapped */
+                margin-bottom: 0.75rem; /* Space between nav links and controls */
+            }
+            .main-nav li {
+                margin: 0.4rem 0.6rem; /* Adjusted margin for smaller screens */
+            }
+            .main-nav a {
+                font-size: 0.9rem;
+                padding: 0.5rem 0; /* Keep padding vertical only */
+            }
+            .nav-controls {
+                position: static; /* Allow controls to flow naturally */
+                margin-top: 0.5rem; /* Space from nav links */
+                justify-content: center;
+                width: 100%;
+                right: auto; /* Remove fixed right position */
+                gap: 0.8rem; /* Smaller gap for controls */
+            }
+            .language-switcher select,
+            .theme-toggle button {
+                padding: 0.4rem 0.8rem; /* Smaller padding for controls */
+                font-size: 0.85rem;
             }
 
             .animated-header {
@@ -541,44 +674,71 @@
                 bottom: 1.5rem;
                 right: 1.5rem;
             }
+
+            .language-skill-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .language-skill-item .language-name {
+                margin-bottom: 0.5rem;
+            }
         }
 
         @media (max-width: 480px) {
-            .title-animate {
-                font-size: 2rem;
-            }
-            .subtitle {
-                font-size: 1rem;
-                letter-spacing: 1px;
-            }
-            h2 {
-                font-size: 1.8rem;
+            .main-nav {
+                padding: 0.6rem 0.5rem; /* Even smaller padding */
             }
             .main-nav li {
-                margin: 0.4rem 0.6rem;
+                margin: 0.3rem 0.4rem;
             }
             .main-nav a {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
+            }
+            .nav-controls {
+                flex-direction: row; /* Keep controls in a row if space allows */
+                gap: 0.5rem;
+            }
+            .language-switcher select,
+            .theme-toggle button {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="scroll-progress"></div>
     <nav class="main-nav">
         <ul>
-            <li><a href="#profil">Profil</a></li>
-            <li><a href="#pendidikan">Pendidikan</a></li>
-            <li><a href="#pengalaman-kerja">Pengalaman</a></li>
-            <li><a href="#proyek">Proyek</a></li>
-            <li><a href="#organisasi">Organisasi</a></li>
+            <li><a href="#profil" data-lang-key="navProfile">Profil</a></li>
+            <li><a href="#pendidikan" data-lang-key="navEducation">Pendidikan</a></li>
+            <li><a href="#pengalaman-kerja" data-lang-key="navExperience">Pengalaman</a></li>
+            <li><a href="#proyek" data-lang-key="navProjects">Proyek</a></li>
+            <li><a href="#penghargaan" data-lang-key="navAwards">Penghargaan</a></li>
+            <li><a href="#organisasi" data-lang-key="navOrganization">Organisasi</a></li>
+            <li><a href="#hobi" data-lang-key="navHobbies">Hobi</a></li>
+            <li><a href="#keahlian-bahasa" data-lang-key="navLanguageSkills">Keahlian Bahasa</a></li>
         </ul>
+        <div class="nav-controls">
+            <div class="language-switcher">
+                <select id="languageSelect">
+                    <option value="id">ID</option>
+                    <option value="en">EN</option>
+                    <option value="jp">JP</option>
+                </select>
+            </div>
+            <div class="theme-toggle">
+                <button id="themeToggleBtn" aria-label="Toggle dark/light mode"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
     </nav>
     <header class="animated-header">
+        <div class="header-particles"></div> <!-- For particle animation -->
         <div class="profile-pic">
             <img src="profile.jpg" alt="Photo of Bima Adhitya" class="profile-img">
         </div>
-        <h1 class="title-animate">Bima Adhitya Susilo Putra</h1>
-        <p class="subtitle">IT Professional | Network & Data Center Specialist | Passionate Innovator</p>
+        <h1 class="title-animate" id="site-title">Bima Adhitya Susilo Putra</h1>
+        <p class="subtitle" id="site-subtitle" data-lang-key="headerSubtitle">IT Professional | Network & Data Center Specialist | Passionate Innovator</p>
         <div class="social-links">
             <a href="https://www.linkedin.com/in/bima-adhitya-susilo-putra-a0b1c2d3e4/" target="_blank" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
             <a href="https://github.com/bima-adhitya" target="_blank" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
@@ -587,121 +747,149 @@
     </header>
 
     <section id="profil">
-        <h2>Profil</h2>
-        <p>Bima Adhitya Susilo Putra adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, Bima memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, ia dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.</p>
+        <h2 data-lang-key="profileTitle">Profil</h2>
+        <p data-lang-key="profileDesc1">Bima Adhitya Susilo Putra adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, Bima memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, ia dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.</p>
         <br>
-        <p><strong>Nama Lengkap:</strong> Bima Adhitya Susilo Putra</p>
-        <p><strong>Nama Panggilan:</strong> Hiro / Bima</p>
-        <p><strong>Tempat, Tanggal Lahir:</strong> Garut, 16 Juni 2001</p>
-        <p><strong>Asal Kota:</strong> Garut</p>
-        <p><strong>Tinggal (saat ini):</strong> Jakarta Selatan</p>
+        <p><strong data-lang-key="fullNameLabel">Nama Lengkap:</strong> <span data-lang-key="fullNameValue">Bima Adhitya Susilo Putra</span></p>
+        <p><strong data-lang-key="nicknameLabel">Nama Panggilan:</strong> <span data-lang-key="nicknameValue">Hiro / Bima</span></p>
+        <p><strong data-lang-key="dobLabel">Tempat, Tanggal Lahir:</strong> <span data-lang-key="dobValue">Garut, 16 Juni 2001</span></p>
+        <p><strong data-lang-key="originCityLabel">Asal Kota:</strong> <span data-lang-key="originCityValue">Garut</span></p>
+        <p><strong data-lang-key="currentResidenceLabel">Tinggal (saat ini):</strong> <span data-lang-key="currentResidenceValue">Jakarta Selatan</span></p>
     </section>
 
     <section id="pendidikan">
-        <h2>Pendidikan</h2>
+        <h2 data-lang-key="educationTitle">Pendidikan</h2>
         <ul>
-            <li><strong>S1:</strong> Universitas Budi Luhur – Fakultas Teknologi Informasi (Teknik Informatika)</li>
-            <li><strong>SMK:</strong> SMKN 2 Garut (Teknik Elektro Industri)</li>
-            <li><strong>SMP:</strong> SMPN 1 Tarogong Kaler</li>
-            <li><strong>SD:</strong> SDN Tarogong 2</li>
-            <li><strong>TK:</strong> TK Azzahra</li>
+            <li><strong data-lang-key="eduS1Title">S1:</strong> <span data-lang-key="eduS1Desc">Universitas Budi Luhur – Fakultas Teknologi Informasi (Teknik Informatika)</span></li>
+            <li><strong data-lang-key="eduSMKTitle">SMK:</strong> <span data-lang-key="eduSMKDesc">SMKN 2 Garut (Teknik Elektro Industri)</span></li>
+            <li><strong data-lang-key="eduSMPTitle">SMP:</strong> <span data-lang-key="eduSMPDesc">SMPN 1 Tarogong Kaler</span></li>
+            <li><strong data-lang-key="eduSDTitle">SD:</strong> <span data-lang-key="eduSDDesc">SDN Tarogong 2</span></li>
+            <li><strong data-lang-key="eduTKTitle">TK:</strong> <span data-lang-key="eduTKDesc">TK Azzahra</span></li>
         </ul>
     </section>
 
     <section id="pengalaman-kerja">
-        <h2>Pengalaman Kerja</h2>
+        <h2 data-lang-key="experienceTitle">Pengalaman Kerja</h2>
         <ul>
             <li>
-                <strong>Bank BTPN Syariah</strong> — IT Staff (Januari 2025 – Sekarang) — Jakarta
+                <strong data-lang-key="expBTPNTitle">Bank BTPN Syariah</strong> — <span data-lang-key="expBTPNRole">IT Staff</span> (<span data-lang-key="expBTPNDates">Januari 2025 – Sekarang</span>) — <span data-lang-key="expBTPNLocation">Jakarta</span>
                 <ul>
-                    <li>Bertanggung jawab atas manajemen dan pemeliharaan perangkat keras dan lunak IT, memastikan operasional sistem berjalan lancar.</li>
-                    <li>Berpartisipasi dalam implementasi solusi IT baru untuk meningkatkan efisiensi departemen.</li>
+                    <li data-lang-key="expBTPNDuty1">Bertanggung jawab atas manajemen dan pemeliharaan perangkat keras dan lunak IT, memastikan operasional sistem berjalan lancar.</li>
+                    <li data-lang-key="expBTPNDuty2">Berpartisipasi dalam implementasi solusi IT baru untuk meningkatkan efisiensi departemen.</li>
                 </ul>
             </li>
             <li>
-                <strong>PT. Ithaca Resources</strong> — Infrastruktur Data Center & Networking Intern (Oktober 2023 – Januari 2024) — Jakarta
+                <strong data-lang-key="expIthacaTitle">PT. Ithaca Resources</strong> — <span data-lang-key="expIthacaRole">Infrastruktur Data Center & Networking Intern</span> (<span data-lang-key="expIthacaDates">Oktober 2023 – Januari 2024</span>) — <span data-lang-key="expIthacaLocation">Jakarta</span>
                 <ul>
-                    <li>Melakukan monitoring dan pemeliharaan VM serta infrastruktur jaringan kantor, memastikan ketersediaan sistem yang tinggi.</li>
-                    <li>Mendukung tim IT dalam troubleshooting masalah jaringan dan server.</li>
+                    <li data-lang-key="expIthacaDuty1">Melakukan monitoring dan pemeliharaan VM serta infrastruktur jaringan kantor, memastikan ketersediaan sistem yang tinggi.</li>
+                    <li data-lang-key="expIthacaDuty2">Mendukung tim IT dalam troubleshooting masalah jaringan dan server.</li>
                 </ul>
             </li>
             <li>
-                <strong>PT. Pindad Persero</strong> — Electrical Engineer Intern (Juli 2017 – September 2017) — Bandung
+                <strong data-lang-key="expPindadTitle">PT. Pindad Persero</strong> — <span data-lang-key="expPindadRole">Electrical Engineer Intern</span> (<span data-lang-key="expPindadDates">Juli 2017 – September 2017</span>) — <span data-lang-key="expPindadLocation">Bandung</span>
                 <ul>
-                    <li>Terlibat dalam instalasi dan pemeliharaan sistem kelistrikan pada kendaraan Anoa.</li>
-                    <li>Mempelajari praktik terbaik dalam rekayasa kelistrikan industri.</li>
+                    <li data-lang-key="expPindadDuty1">Terlibat dalam instalasi dan pemeliharaan sistem kelistrikan pada kendaraan Anoa.</li>
+                    <li data-lang-key="expPindadDuty2">Mempelajari praktik terbaik dalam rekayasa kelistrikan industri.</li>
                 </ul>
             </li>
             <li>
-                <strong>Wirausaha (Membantu Orang Tua)</strong> — Penjualan Ritel (2015 – 2016) — Garut
+                <strong data-lang-key="expEntrepreneurTitle">Wirausaha (Membantu Orang Tua)</strong> — <span data-lang-key="expEntrepreneurRole">Penjualan Ritel</span> (<span data-lang-key="expEntrepreneurDates">2015 – 2016</span>) — <span data-lang-key="expEntrepreneurLocation">Garut</span>
                 <ul>
-                    <li>Mengembangkan keterampilan komunikasi, manajemen inventaris, dan pelayanan pelanggan melalui pengalaman penjualan langsung.</li>
+                    <li data-lang-key="expEntrepreneurDuty1">Mengembangkan keterampilan komunikasi, manajemen inventaris, dan pelayanan pelanggan melalui pengalaman penjualan langsung.</li>
                 </ul>
             </li>
         </ul>
     </section>
 
     <section id="proyek" class="projects-section">
-        <h2 class="section-title">Proyek</h2>
+        <h2 class="section-title" data-lang-key="projectsTitle">Proyek</h2>
         <div class="projects-grid">
             <div class="project-card">
                 <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c171f488-51af-46fd-b745-ef00c3559615.png" alt="Score Push Game">
-                <h3>Game Score Push</h3>
-                <p>Pengembangan game bertema score push dengan mekanik unik, berfokus pada optimasi performa dan pengalaman pengguna.</p>
+                <h3 data-lang-key="projectGameTitle">Game Score Push</h3>
+                <p data-lang-key="projectGameDesc">Pengembangan game bertema score push dengan mekanik unik, berfokus pada optimasi performa dan pengalaman pengguna.</p>
             </div>
             <div class="project-card">
                 <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fa71bb8-3095-46fc-a95f-33d87d907c71.png" alt="Aqua Threads">
-                <h3>Aqua Threads</h3>
-                <p>Website penjualan kaos dengan sistem pembayaran online yang terintegrasi, meningkatkan jangkauan pasar dan efisiensi transaksi.</p>
+                <h3 data-lang-key="projectThreadsTitle">Aqua Threads</h3>
+                <p data-lang-key="projectThreadsDesc">Website penjualan kaos dengan sistem pembayaran online yang terintegrasi, meningkatkan jangkauan pasar dan efisiensi transaksi.</p>
             </div>
             <div class="project-card">
                 <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/228ef65b-552b-4b95-8089-af1bd05a6fbf.png" alt="Aqua Tech">
-                <h3>Aqua Tech</h3>
-                <p>Sistem pengolahan data stok gudang berbasis web, dirancang untuk mempermudah pelacakan inventaris dan analisis data.</p>
+                <h3 data-lang-key="projectTechTitle">Aqua Tech</h3>
+                <p data-lang-key="projectTechDesc">Sistem pengolahan data stok gudang berbasis web, dirancang untuk mempermudah pelacakan inventaris dan analisis data.</p>
             </div>
             <div class="project-card">
                 <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/19835e02-9695-46db-9ace-729d6ec891f1.png" alt="IoT Project">
-                <h3>Sistem Smarthome IoT</h3>
-                <p>Proyek magang & tugas akhir untuk kontrol rumah pintar, menunjukkan kemampuan dalam integrasi hardware-software.</p>
+                <h3 data-lang-key="projectIoTTitle">Sistem Smarthome IoT</h3>
+                <p data-lang-key="projectIoTDesc">Proyek magang & tugas akhir untuk kontrol rumah pintar, menunjukkan kemampuan dalam integrasi hardware-software.</p>
             </div>
         </div>
     </section>
 
     <section id="penghargaan">
-        <h2>Penghargaan</h2>
+        <h2 data-lang-key="awardsTitle">Penghargaan</h2>
         <ul>
-            <li>Juara 3 Karya Tulis Ilmiah Se-Universitas Budi Luhur – "Inovasi Sistem Monitoring Lingkungan Berbasis IoT"</li>
+            <li><span data-lang-key="award1">Juara 3 Karya Tulis Ilmiah Se-Universitas Budi Luhur – "Inovasi Sistem Monitoring Lingkungan Berbasis IoT"</span></li>
         </ul>
     </section>
 
     <section id="organisasi">
-        <h2>Organisasi & Komunitas</h2>
+        <h2 data-lang-key="organizationTitle">Organisasi & Komunitas</h2>
         <ul>
             <li>
-                Anggota <strong>Palang Merah Remaja (PMR)</strong> — SMK (2016-2018)
+                <strong data-lang-key="orgPMRTitle">Anggota Palang Merah Remaja (PMR)</strong> — <span data-lang-key="orgPMRRole">SMK</span> (<span data-lang-key="orgPMRDates">2016-2018</span>)
                 <ul>
-                    <li>Mengembangkan keterampilan kepemimpinan, kerja tim, dan empati melalui kegiatan sosial dan kemanusiaan.</li>
+                    <li data-lang-key="orgPMRDesc">Mengembangkan keterampilan kepemimpinan, kerja tim, dan empati melalui kegiatan sosial dan kemanusiaan.</li>
                 </ul>
             </li>
             <li>
-                Anggota <strong>BEM Fakultas</strong>, menjabat sebagai <strong>Ketua Divisi Ikatan Organisasi Keluarga Mahasiswa</strong> (2019-2020)
+                <strong data-lang-key="orgBEMTitle">Anggota BEM Fakultas</strong>, <span data-lang-key="orgBEMRole">menjabat sebagai Ketua Divisi Ikatan Organisasi Keluarga Mahasiswa</span> (<span data-lang-key="orgBEMDates">2019-2020</span>)
                 <ul>
-                    <li>Memimpin dan mengkoordinasikan berbagai kegiatan mahasiswa, meningkatkan kemampuan organisasi, komunikasi, dan manajemen acara.</li>
+                    <li data-lang-key="orgBEMDesc">Memimpin dan mengkoordinasikan berbagai kegiatan mahasiswa, meningkatkan kemampuan organisasi, komunikasi, dan manajemen acara.</li>
                 </ul>
             </li>
         </ul>
     </section>
 
+    <section id="keahlian-bahasa">
+        <h2 data-lang-key="languageSkillsTitle">Keahlian Bahasa</h2>
+        <div class="language-skill-item">
+            <span class="language-name" data-lang-key="langIndonesian">Indonesia</span>
+            <div class="language-skill-bar-container">
+                <div class="language-skill-bar" style="width: 100%;" data-level="100"></div>
+            </div>
+        </div>
+        <div class="language-skill-item">
+            <span class="language-name" data-lang-key="langEnglish">English</span>
+            <div class="language-skill-bar-container">
+                <div class="language-skill-bar" style="width: 75%;" data-level="75"></div>
+            </div>
+        </div>
+        <div class="language-skill-item">
+            <span class="language-name" data-lang-key="langJapanese">Japanese</span>
+            <div class="language-skill-bar-container">
+                <div class="language-skill-bar" style="width: 50%;" data-level="50"></div>
+            </div>
+        </div>
+        <div class="language-skill-item">
+            <span class="language-name" data-lang-key="langSundanese">Sunda (Lokal)</span>
+            <div class="language-skill-bar-container">
+                <div class="language-skill-bar" style="width: 90%;" data-level="90"></div>
+            </div>
+        </div>
+    </section>
+
     <section id="hobi">
-        <h2>Hobi & Minat</h2>
-        <p><strong>Hobi:</strong> Motor & Otomotif (Menunjukkan ketelitian, pemecahan masalah mekanis, dan pemahaman sistem kompleks)</p>
-        <p><strong>Minat:</strong> Teknologi, Sains, dan Otomotif (Mendorong pembelajaran berkelanjutan dan adaptasi terhadap inovasi)</p>
-        <p>Aktif bersosialisasi & terlibat dalam komunitas (Menunjukkan kemampuan interpersonal, networking, dan kolaborasi)</p>
+        <h2 data-lang-key="hobbiesTitle">Hobi & Minat</h2>
+        <p><strong data-lang-key="hobbyMotorTitle">Hobi:</strong> <span data-lang-key="hobbyMotorDesc">Motor & Otomotif (Menunjukkan ketelitian, pemecahan masalah mekanis, dan pemahaman sistem kompleks)</span></p>
+        <p><strong data-lang-key="interestTechTitle">Minat:</strong> <span data-lang-key="interestTechDesc">Teknologi, Sains, dan Otomotif (Mendorong pembelajaran berkelanjutan dan adaptasi terhadap inovasi)</span></p>
+        <p data-lang-key="socialInterest">Aktif bersosialisasi & terlibat dalam komunitas (Menunjukkan kemampuan interpersonal, networking, dan kolaborasi)</p>
     </section>
 
     <footer class="animated-footer">
         <div class="footer-content">
-            <p>&copy; 2025 Bima Adhitya Susilo Putra</p>
+            <p>&copy; 2025 <span data-lang-key="footerCopyrightName">Bima Adhitya Susilo Putra</span></p>
             <div class="contact-info">
                 <p><i class="fas fa-envelope"></i> mizuhiro4782@gmail.com</p>
                 <p><i class="fas fa-phone"></i> +62 896 3456 8406</p>
@@ -713,7 +901,343 @@
     </footer>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-    // Smooth scrolling for navigation
+    // --- Language Switcher ---
+    const translations = {
+        id: {
+            pageTitle: "Profil Bima Adhitya Susilo Putra",
+            navProfile: "Profil",
+            navEducation: "Pendidikan",
+            navExperience: "Pengalaman",
+            navProjects: "Proyek",
+            navAwards: "Penghargaan",
+            navOrganization: "Organisasi",
+            navHobbies: "Hobi",
+            navLanguageSkills: "Keahlian Bahasa",
+            headerSubtitle: "Profesional IT | Spesialis Jaringan & Data Center | Inovator Bersemangat",
+            profileTitle: "Profil",
+            profileDesc1: "Bima Adhitya Susilo Putra adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, Bima memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, ia dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.",
+            fullNameLabel: "Nama Lengkap:",
+            fullNameValue: "Bima Adhitya Susilo Putra",
+            nicknameLabel: "Nama Panggilan:",
+            nicknameValue: "Hiro / Bima",
+            dobLabel: "Tempat, Tanggal Lahir:",
+            dobValue: "Garut, 16 Juni 2001",
+            originCityLabel: "Asal Kota:",
+            originCityValue: "Garut",
+            currentResidenceLabel: "Tinggal (saat ini):",
+            currentResidenceValue: "Jakarta Selatan",
+            educationTitle: "Pendidikan",
+            eduS1Title: "S1:",
+            eduS1Desc: "Universitas Budi Luhur – Fakultas Teknologi Informasi (Teknik Informatika)",
+            eduSMKTitle: "SMK:",
+            eduSMKDesc: "SMKN 2 Garut (Teknik Elektro Industri)",
+            eduSMPTitle: "SMP:",
+            eduSMPDesc: "SMPN 1 Tarogong Kaler",
+            eduSDTitle: "SD:",
+            eduSDDesc: "SDN Tarogong 2",
+            eduTKTitle: "TK:",
+            eduTKDesc: "TK Azzahra",
+            experienceTitle: "Pengalaman Kerja",
+            expBTPNTitle: "Bank BTPN Syariah",
+            expBTPNRole: "Staf IT",
+            expBTPNDates: "Januari 2025 – Sekarang",
+            expBTPNLocation: "Jakarta",
+            expBTPNDuty1: "Bertanggung jawab atas manajemen dan pemeliharaan perangkat keras dan lunak IT, memastikan operasional sistem berjalan lancar.",
+            expBTPNDuty2: "Berpartisipasi dalam implementasi solusi IT baru untuk meningkatkan efisiensi departemen.",
+            expIthacaTitle: "PT. Ithaca Resources",
+            expIthacaRole: "Intern Infrastruktur Data Center & Jaringan",
+            expIthacaDates: "Oktober 2023 – Januari 2024",
+            expIthacaLocation: "Jakarta",
+            expIthacaDuty1: "Melakukan monitoring dan pemeliharaan VM serta infrastruktur jaringan kantor, memastikan ketersediaan sistem yang tinggi.",
+            expIthacaDuty2: "Mendukung tim IT dalam troubleshooting masalah jaringan dan server.",
+            expPindadTitle: "PT. Pindad Persero",
+            expPindadRole: "Intern Insinyur Listrik",
+            expPindadDates: "Juli 2017 – September 2017",
+            expPindadLocation: "Bandung",
+            expPindadDuty1: "Terlibat dalam instalasi dan pemeliharaan sistem kelistrikan pada kendaraan Anoa.",
+            expPindadDuty2: "Mempelajari praktik terbaik dalam rekayasa kelistrikan industri.",
+            expEntrepreneurTitle: "Wirausaha (Membantu Orang Tua)",
+            expEntrepreneurRole: "Penjualan Ritel",
+            expEntrepreneurDates: "2015 – 2016",
+            expEntrepreneurLocation: "Garut",
+            expEntrepreneurDuty1: "Mengembangkan keterampilan komunikasi, manajemen inventaris, dan pelayanan pelanggan melalui pengalaman penjualan langsung.",
+            projectsTitle: "Proyek",
+            projectGameTitle: "Game Score Push",
+            projectGameDesc: "Pengembangan game bertema score push dengan mekanik unik, berfokus pada optimasi performa dan pengalaman pengguna.",
+            projectThreadsTitle: "Aqua Threads",
+            projectThreadsDesc: "Website penjualan kaos dengan sistem pembayaran online yang terintegrasi, meningkatkan jangkauan pasar dan efisiensi transaksi.",
+            projectTechTitle: "Aqua Tech",
+            projectTechDesc: "Sistem pengolahan data stok gudang berbasis web, dirancang untuk mempermudah pelacakan inventaris dan analisis data.",
+            projectIoTTitle: "Sistem Smarthome IoT",
+            projectIoTDesc: "Proyek magang & tugas akhir untuk kontrol rumah pintar, menunjukkan kemampuan dalam integrasi hardware-software.",
+            awardsTitle: "Penghargaan",
+            award1: "Juara 3 Karya Tulis Ilmiah Se-Universitas Budi Luhur – \"Inovasi Sistem Monitoring Lingkungan Berbasis IoT\"",
+            organizationTitle: "Organisasi & Komunitas",
+            orgPMRTitle: "Anggota Palang Merah Remaja (PMR)",
+            orgPMRRole: "SMK",
+            orgPMRDates: "2016-2018",
+            orgPMRDesc: "Mengembangkan keterampilan kepemimpinan, kerja tim, dan empati melalui kegiatan sosial dan kemanusiaan.",
+            orgBEMTitle: "Anggota BEM Fakultas",
+            orgBEMRole: "menjabat sebagai Ketua Divisi Ikatan Organisasi Keluarga Mahasiswa",
+            orgBEMDates: "2019-2020",
+            orgBEMDesc: "Memimpin dan mengkoordinasikan berbagai kegiatan mahasiswa, meningkatkan kemampuan organisasi, komunikasi, dan manajemen acara.",
+            languageSkillsTitle: "Keahlian Bahasa",
+            langIndonesian: "Indonesia",
+            langEnglish: "English",
+            langJapanese: "Japanese",
+            langSundanese: "Sunda (Lokal)",
+            hobbiesTitle: "Hobi & Minat",
+            hobbyMotorTitle: "Hobi:",
+            hobbyMotorDesc: "Motor & Otomotif (Menunjukkan ketelitian, pemecahan masalah mekanis, dan pemahaman sistem kompleks)",
+            interestTechTitle: "Minat:",
+            interestTechDesc: "Teknologi, Sains, dan Otomotif (Mendorong pembelajaran berkelanjutan dan adaptasi terhadap inovasi)",
+            socialInterest: "Aktif bersosialisasi & terlibat dalam komunitas (Menunjukkan kemampuan interpersonal, networking, dan kolaborasi)",
+            footerCopyrightName: "Bima Adhitya Susilo Putra"
+        },
+        en: {
+            pageTitle: "Bima Adhitya Susilo Putra's Profile",
+            navProfile: "Profile",
+            navEducation: "Education",
+            navExperience: "Experience",
+            navProjects: "Projects",
+            navAwards: "Awards",
+            navOrganization: "Organization",
+            navHobbies: "Hobbies",
+            navLanguageSkills: "Language Skills",
+            headerSubtitle: "IT Professional | Network & Data Center Specialist | Passionate Innovator",
+            profileTitle: "Profile",
+            profileDesc1: "Bima Adhitya Susilo Putra is a dedicated IT professional with a strong background in Informatics Engineering. Experienced in IT infrastructure management, networking, and system development, Bima has a deep interest in technological innovation and problem-solving. Hailing from Garut, he is known as a proactive, adaptable individual with a high spirit for learning new things.",
+            fullNameLabel: "Full Name:",
+            fullNameValue: "Bima Adhitya Susilo Putra",
+            nicknameLabel: "Nickname:",
+            nicknameValue: "Hiro / Bima",
+            dobLabel: "Place, Date of Birth:",
+            dobValue: "Garut, June 16, 2001",
+            originCityLabel: "Origin City:",
+            originCityValue: "Garut",
+            currentResidenceLabel: "Current Residence:",
+            currentResidenceValue: "South Jakarta",
+            educationTitle: "Education",
+            eduS1Title: "Bachelor's:",
+            eduS1Desc: "Budi Luhur University – Faculty of Information Technology (Informatics Engineering)",
+            eduSMKTitle: "Vocational High School:",
+            eduSMKDesc: "SMKN 2 Garut (Industrial Electrical Engineering)",
+            eduSMPTitle: "Junior High School:",
+            eduSMPDesc: "SMPN 1 Tarogong Kaler",
+            eduSDTitle: "Elementary School:",
+            eduSDDesc: "SDN Tarogong 2",
+            eduTKTitle: "Kindergarten:",
+            eduTKDesc: "TK Azzahra",
+            experienceTitle: "Work Experience",
+            expBTPNTitle: "Bank BTPN Syariah",
+            expBTPNRole: "IT Staff",
+            expBTPNDates: "January 2025 – Present",
+            expBTPNLocation: "Jakarta",
+            expBTPNDuty1: "Responsible for the management and maintenance of IT hardware and software, ensuring smooth system operations.",
+            expBTPNDuty2: "Participated in the implementation of new IT solutions to improve departmental efficiency.",
+            expIthacaTitle: "PT. Ithaca Resources",
+            expIthacaRole: "Data Center & Networking Infrastructure Intern",
+            expIthacaDates: "October 2023 – January 2024",
+            expIthacaLocation: "Jakarta",
+            expIthacaDuty1: "Monitored and maintained VMs and office network infrastructure, ensuring high system availability.",
+            expIthacaDuty2: "Supported the IT team in troubleshooting network and server issues.",
+            expPindadTitle: "PT. Pindad Persero",
+            expPindadRole: "Electrical Engineer Intern",
+            expPindadDates: "July 2017 – September 2017",
+            expPindadLocation: "Bandung",
+            expPindadDuty1: "Involved in the installation and maintenance of electrical systems on Anoa vehicles.",
+            expPindadDuty2: "Learned best practices in industrial electrical engineering.",
+            expEntrepreneurTitle: "Entrepreneurship (Assisting Parents)",
+            expEntrepreneurRole: "Retail Sales",
+            expEntrepreneurDates: "2015 – 2016",
+            expEntrepreneurLocation: "Garut",
+            expEntrepreneurDuty1: "Developed communication skills, inventory management, and customer service through direct sales experience.",
+            projectsTitle: "Projects",
+            projectGameTitle: "Score Push Game",
+            projectGameDesc: "Development of a score push themed game with unique mechanics, focusing on performance optimization and user experience.",
+            projectThreadsTitle: "Aqua Threads",
+            projectThreadsDesc: "E-commerce website for t-shirt sales with integrated online payment system, expanding market reach and transaction efficiency.",
+            projectTechTitle: "Aqua Tech",
+            projectTechDesc: "Web-based warehouse stock data processing system, designed to facilitate inventory tracking and data analysis.",
+            projectIoTTitle: "IoT Smarthome System",
+            projectIoTDesc: "Internship & final project for smart home control, demonstrating capabilities in hardware-software integration.",
+            awardsTitle: "Awards",
+            award1: "3rd Place Scientific Writing Competition at Budi Luhur University – \"Innovation of IoT-Based Environmental Monitoring System\"",
+            organizationTitle: "Organization & Community",
+            orgPMRTitle: "Member of Youth Red Cross (PMR)",
+            orgPMRRole: "Vocational High School",
+            orgPMRDates: "2016-2018",
+            orgPMRDesc: "Developed leadership, teamwork, and empathy skills through social and humanitarian activities.",
+            orgBEMTitle: "Member of Faculty Student Executive Board (BEM)",
+            orgBEMRole: "served as Head of Student Organization Liaison Division",
+            orgBEMDates: "2019-2020",
+            orgBEMDesc: "Led and coordinated various student activities, enhancing organizational, communication, and event management skills.",
+            languageSkillsTitle: "Language Skills",
+            langIndonesian: "Indonesian",
+            langEnglish: "English",
+            langJapanese: "Japanese",
+            langSundanese: "Sundanese (Local)",
+            hobbiesTitle: "Hobbies & Interests",
+            hobbyMotorTitle: "Hobbies:",
+            hobbyMotorDesc: "Motorcycles & Automotive (Demonstrates meticulousness, mechanical problem-solving, and understanding of complex systems)",
+            interestTechTitle: "Interests:",
+            interestTechDesc: "Technology, Science, and Automotive (Encourages continuous learning and adaptation to innovation)",
+            socialInterest: "Actively socializing & involved in communities (Demonstrates interpersonal skills, networking, and collaboration)",
+            footerCopyrightName: "Bima Adhitya Susilo Putra"
+        },
+        jp: {
+            pageTitle: "ビマ・アディティア・スシロ・プトラのプロフィール",
+            navProfile: "プロフィール",
+            navEducation: "学歴",
+            navExperience: "職歴",
+            navProjects: "プロジェクト",
+            navAwards: "受賞歴",
+            navOrganization: "組織",
+            navHobbies: "趣味",
+            navLanguageSkills: "語学力",
+            headerSubtitle: "ITプロフェッショナル | ネットワーク＆データセンター専門家 | 情熱的なイノベーター",
+            profileTitle: "プロフィール",
+            profileDesc1: "ビマ・アディティア・スシロ・プトラは、情報工学の強力なバックグラウンドを持つ献身的なITプロフェッショナルです。ITインフラ管理、ネットワーキング、システム開発の経験を持ち、技術革新と問題解決に深い関心を持っています。ガルト出身で、積極的で適応力があり、新しいことを学ぶ意欲が高い人物として知られています。",
+            fullNameLabel: "氏名:",
+            fullNameValue: "ビマ・アディティア・スシロ・プトラ",
+            nicknameLabel: "ニックネーム:",
+            nicknameValue: "ヒロ / ビマ",
+            dobLabel: "生年月日:",
+            dobValue: "ガルト、2001年6月16日",
+            originCityLabel: "出身地:",
+            originCityValue: "ガルト",
+            currentResidenceLabel: "現住所:",
+            currentResidenceValue: "南ジャカルタ",
+            educationTitle: "学歴",
+            eduS1Title: "学士:",
+            eduS1Desc: "ブディ・ルフル大学 – 情報技術学部 (情報工学)",
+            eduSMKTitle: "専門高校:",
+            eduSMKDesc: "SMKN 2 ガルト (産業電気工学)",
+            eduSMPTitle: "中学校:",
+            eduSMPDesc: "SMPN 1 タロゴン・カレル",
+            eduSDTitle: "小学校:",
+            eduSDDesc: "SDN タロゴン 2",
+            eduTKTitle: "幼稚園:",
+            eduTKDesc: "TK アッザフラ",
+            experienceTitle: "職歴",
+            expBTPNTitle: "バンクBTPNシャリア",
+            expBTPNRole: "ITスタッフ",
+            expBTPNDates: "2025年1月 – 現在",
+            expBTPNLocation: "ジャカルタ",
+            expBTPNDuty1: "ITハードウェアおよびソフトウェアの管理と保守を担当し、システム運用が円滑に行われることを保証。",
+            expBTPNDuty2: "部門の効率を向上させるための新しいITソリューションの導入に参加。",
+            expIthacaTitle: "PT. イサカ・リソース",
+            expIthacaRole: "データセンター＆ネットワーキングインフラインターン",
+            expIthacaDates: "2023年10月 – 2024年1月",
+            expIthacaLocation: "ジャカルタ",
+            expIthacaDuty1: "VMおよびオフィスネットワークインフラの監視と保守を行い、高いシステム可用性を確保。",
+            expIthacaDuty2: "ネットワークおよびサーバーの問題解決においてITチームをサポート。",
+            expPindadTitle: "PT. ピンダッド・ペルセロ",
+            expPindadRole: "電気技師インターン",
+            expPindadDates: "2017年7月 – 2017年9月",
+            expPindadLocation: "バンドン",
+            expPindadDuty1: "アノア車両の電気システムの設置と保守に関与。",
+            expPindadDuty2: "産業電気工学におけるベストプラクティスを学ぶ。",
+            expEntrepreneurTitle: "起業 (両親の支援)",
+            expEntrepreneurRole: "小売販売",
+            expEntrepreneurDates: "2015年 – 2016年",
+            expEntrepreneurLocation: "ガルト",
+            expEntrepreneurDuty1: "直接販売経験を通じて、コミュニケーションスキル、在庫管理、顧客サービスを開発。",
+            projectsTitle: "プロジェクト",
+            projectGameTitle: "スコアプッシュゲーム",
+            projectGameDesc: "ユニークなメカニクスを持つスコアプッシュテーマのゲーム開発。パフォーマンス最適化とユーザーエクスペリエンスに焦点を当てる。",
+            projectThreadsTitle: "アクアスレッズ",
+            projectThreadsDesc: "オンライン決済システムと統合されたTシャツ販売ウェブサイト。市場範囲と取引効率を向上。",
+            projectTechTitle: "アクアテック",
+            projectTechDesc: "在庫追跡とデータ分析を容易にするために設計された、ウェブベースの倉庫在庫データ処理システム。",
+            projectIoTTitle: "IoTスマートホームシステム",
+            projectIoTDesc: "スマートホーム制御のためのインターンシップ＆最終プロジェクト。ハードウェアとソフトウェアの統合能力を示す。",
+            awardsTitle: "受賞歴",
+            award1: "ブディ・ルフル大学科学論文コンペティション3位 – 「IoTベースの環境監視システムの革新」",
+            organizationTitle: "組織＆コミュニティ",
+            orgPMRTitle: "青少年赤十字 (PMR) メンバー",
+            orgPMRRole: "専門高校",
+            orgPMRDates: "2016-2018",
+            orgPMRDesc: "社会活動や人道活動を通じて、リーダーシップ、チームワーク、共感のスキルを開発。",
+            orgBEMTitle: "学部学生執行委員会 (BEM) メンバー",
+            orgBEMRole: "学生組織連絡部門長を務める",
+            orgBEMDates: "2019-2020",
+            orgBEMDesc: "様々な学生活動を主導・調整し、組織力、コミュニケーション能力、イベント管理能力を向上。",
+            languageSkillsTitle: "語学力",
+            langIndonesian: "インドネシア語",
+            langEnglish: "英語",
+            langJapanese: "日本語",
+            langSundanese: "スンダ語 (地域)",
+            hobbiesTitle: "趣味＆興味",
+            hobbyMotorTitle: "趣味:",
+            hobbyMotorDesc: "バイク＆自動車 (細部へのこだわり、機械的問題解決、複雑なシステムの理解を示す)",
+            interestTechTitle: "Minat:",
+            interestTechDesc: "テクノロジー、科学、自動車 (継続的な学習と革新への適応を促す)",
+            socialInterest: "積極的に交流し、コミュニティに参加 (対人スキル、ネットワーキング、コラボレーションを示す)",
+            footerCopyrightName: "ビマ・アディティア・スシロ・プトラ"
+        }
+    };
+
+    const languageSelect = document.getElementById('languageSelect');
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const body = document.body;
+
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-lang-key]').forEach(element => {
+            const key = element.getAttribute('data-lang-key');
+            if (translations[lang] && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+        // Update page title separately as it's in <title> tag
+        document.title = translations[lang].pageTitle;
+        localStorage.setItem('selectedLanguage', lang);
+    }
+
+    function toggleTheme() {
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        themeToggleBtn.innerHTML = isDarkMode ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }
+
+    // Initialize language and theme on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'id';
+        languageSelect.value = savedLanguage;
+        setLanguage(savedLanguage);
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        // Particle animation for header
+        const headerParticles = document.querySelector('.header-particles');
+        if (headerParticles) {
+            for (let i = 0; i < 20; i++) { // Create 20 particles
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = `${Math.random() * 10 + 5}px`; // Random size 5-15px
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 10 + 10}s`; // Random duration 10-20s
+                particle.style.animationDelay = `${Math.random() * 5}s`; // Random delay
+                headerParticles.appendChild(particle);
+            }
+        }
+    });
+
+    languageSelect.addEventListener('change', (event) => {
+        setLanguage(event.target.value);
+    });
+
+    themeToggleBtn.addEventListener('click', toggleTheme);
+
+    // --- Smooth scrolling for navigation ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -727,7 +1251,7 @@
         });
     });
 
-    // Scroll to top button
+    // --- Scroll to top button ---
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', () => {
         if (window.pageYOffset > 400) { // Show button after more scrolling
@@ -746,15 +1270,37 @@
         });
     });
 
-    // Animate sections on scroll
+    // --- Scroll Progress Bar ---
+    const scrollProgress = document.querySelector('.scroll-progress');
+    window.addEventListener('scroll', () => {
+        const totalHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPosition = window.pageYOffset;
+        const progress = (scrollPosition / totalHeight) * 100;
+        scrollProgress.style.width = `${progress}%`;
+    });
+
+    // --- Animate sections on scroll & Language Skill Bars Animation ---
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate');
+                // Animate language skill bars if this is the language skills section
+                if (entry.target.id === 'keahlian-bahasa') {
+                    entry.target.querySelectorAll('.language-skill-bar').forEach(bar => {
+                        const level = bar.getAttribute('data-level');
+                        bar.style.width = `${level}%`;
+                    });
+                }
             } else {
                 // Optional: remove 'animate' class if you want the animation to replay on scroll back up
                 // entry.target.classList.remove('animate');
+                // Reset language skill bars if section is out of view
+                if (entry.target.id === 'keahlian-bahasa') {
+                    entry.target.querySelectorAll('.language-skill-bar').forEach(bar => {
+                        bar.style.width = '0%';
+                    });
+                }
             }
         });
     }, {
