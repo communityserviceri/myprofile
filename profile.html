@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Bima Adhitya Susilo Putra</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2563eb;
+            --secondary: #1e40af;
+            --dark: #1e1e2c;
+            --light: #f8fafc;
+            --accent: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .main-nav {
+            background: rgba(37, 99, 235, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 1rem;
+        }
+        
+        .main-nav li {
+            margin: 0 1rem;
+        }
+        
+        .main-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .main-nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Header */
+        .animated-header {
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animated-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            background-size: 50px 50px;
+            opacity: 0.3;
+        }
+
+        .header-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            border: 4px solid white;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .title-animate {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.2) both;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1.2) 0.3s both;
+            opacity: 0;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            opacity: 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--accent);
+        }
+        
+        /* Content Sections */
+        section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            bottom: -10px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            border-radius: 2px;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 40px;
+            bottom: 8px;
+            left: 5%;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            filter: blur(10px);
+            transform: translateZ(-20px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::after {
+            opacity: 0.8;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-card h3 {
+            padding: 1rem 1rem 0.5rem;
+            color: var(--dark);
+        }
+        
+        .project-card p {
+            padding: 0 1rem 1.5rem;
+            color: #666;
+        }
+        
+        /* Footer */
+        .animated-footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        
+        .contact-info i {
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--accent);
+            z-index: 1001;
+            transition: width 0.1s linear;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 99;
+            transition: transform 0.3s ease;
+        }
+        
+        #scrollTopBtn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: none;
+        }
+        
+        #scrollTopBtn:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-nav ul {
+                flex-wrap: wrap;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .animated-header {
+                padding-top: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#profil">Profil</a></li>
+            <li><a href="#pendidikan">Pendidikan</a></li>
+            <li><a href="#pengalaman-kerja">Pengalaman</a></li>
+            <li><a href="#proyek">Proyek</a></li>
+            <li><a href="#organisasi">Organisasi</a></li>
+        </ul>
+    </nav>
+    <header class="animated-header">
+        <div class="profile-pic">
+            <img src="foto.jpg" alt="Photo of Bima Adhitya" class="profile-img">
+        </div>
+        <h1 class="title-animate">Bima Adhitya Susilo Putra</h1>
+        <p class="subtitle">IT Professional & Technology Enthusiast</p>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/hiro.esc/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </header>
+
+    <section id="profil">
+        <h2>Profil</h2>
+        <p><strong>Nama Lengkap:</strong> Bima Adhitya Susilo Putra</p>
+        <p><strong>Nama Panggilan:</strong> Hiro / Bima</p>
+        <p><strong>Tempat, Tanggal Lahir:</strong> Garut, 16 Juni 2001</p>
+        <p><strong>Asal Kota:</strong> Garut</p>
+    </section>
+
+    <section id="pendidikan">
+        <h2>Pendidikan</h2>
+        <ul>
+            <li><strong>TK:</strong> TK Azzahra</li>
+            <li><strong>SD:</strong> SDN Tarogong 2</li>
+            <li><strong>SMP:</strong> SMPN 1 Tarogong Kaler</li>
+            <li><strong>SMK:</strong> SMKN 2 Garut (Teknik Elektro Industri)</li>
+            <li><strong>S1:</strong> Universitas Budi Luhur – Fakultas Teknologi Informasi (Teknik Informatika)</li>
+        </ul>
+    </section>
+
+    <section id="pengalaman-kerja">
+        <h2>Pengalaman Kerja</h2>
+        <ul>
+            <li><strong>Jualan Baju (Membantu Orang Tua)</strong> — Garut</li>
+            <li><strong>Magang:</strong>
+                <ul>
+                    <li>PT. Pindad Persero — Electrical Engineer (Instalasi Kelistrikan Anoa) — Bandung</li>
+                    <li>PT. Ithaca Resources — Infrastruktur Data Center & Networking (Monitoring VM & Jaringan Kantor) — Jakarta</li>
+                </ul>
+            </li>
+            <li><strong>Bekerja:</strong>
+                <ul>
+                    <li>Bank BTPN Syariah — IT Staff (Management Perangkat IT) — Jakarta</li>
+                </ul>
+            </li>
+        </ul>
+    </section>
+
+    <section id="proyek" class="projects-section">
+        <h2 class="section-title">Proyek</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c171f488-51af-46fd-b745-ef00c3559615.png" alt="Score Push Game">
+                <h3>Game Score Push</h3>
+                <p>Pengembangan game bertema score push dengan mekanik unik</p>
+            </div>
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6fa71bb8-3095-46fc-a95f-33d87d907c71.png" alt="Aqua Threads">
+                <h3>Aqua Threads</h3>
+                <p>Website penjualan kaos dengan sistem pembayaran online</p>
+            </div>
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/228ef65b-552b-4b95-8089-af1bd05a6fbf.png" alt="Aqua Tech">
+                <h3>Aqua Tech</h3>
+                <p>Sistem pengolahan data stok gudang berbasis web</p>
+            </div>
+            <div class="project-card">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/19835e02-9695-46db-9ace-729d6ec891f1.png" alt="IoT Project">
+                <h3>Sistem Smarthome IoT</h3>
+                <p>Proyek magang & tugas akhir untuk kontrol rumah pintar</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="penghargaan">
+        <h2>Penghargaan</h2>
+        <ul>
+            <li>Juara 3 Karya Tulis Ilmiah Se-Universitas</li>
+        </ul>
+    </section>
+
+    <section id="organisasi">
+        <h2>Organisasi & Komunitas</h2>
+        <ul>
+            <li>Anggota <strong>Palang Merah Remaja (PMR)</strong> — SMK</li>
+            <li>Anggota <strong>BEM Fakultas</strong>, menjabat sebagai <strong>Ketua Divisi Ikatan Organisasi Keluarga Mahasiswa</strong></li>
+        </ul>
+    </section>
+
+    <section id="hobi">
+        <h2>Hobi & Minat</h2>
+        <p><strong>Hobi:</strong> Motor & Otomotif</p>
+        <p><strong>Minat:</strong> Teknologi, Sains, dan Otomotif</p>
+        <p>Aktif bersosialisasi & terlibat dalam komunitas</p>
+    </section>
+
+    <footer class="animated-footer">
+        <div class="footer-content">
+            <p>&copy; 2023 Bima Adhitya Susilo Putra</p>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> bima@example.com</p>
+                <p><i class="fas fa-phone"></i> +62 123 4567 890</p>
+            </div>
+        </div>
+        <div class="scroll-top">
+            <button id="scrollTopBtn" title="Go to top">↑</button>
+        </div>
+    </footer>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.style.display = 'block';
+        } else {
+            scrollTopBtn.style.display = 'none';
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Animate sections on scroll
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+</script>
+</body>
+</html>
