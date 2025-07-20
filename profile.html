@@ -48,6 +48,7 @@
             overflow-x: hidden;
             font-family: 'Open Sans', sans-serif; /* Body font */
             transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: 5.5rem; /* Default padding for desktop navbar height */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -573,6 +574,10 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding-top: 10rem; /* Increased padding for mobile navbar height */
+            }
+
             .main-nav {
                 flex-direction: column; /* Stack items vertically */
                 padding: 0.75rem 1rem; /* Reduced horizontal padding */
@@ -685,6 +690,10 @@
         }
 
         @media (max-width: 480px) {
+            body {
+                padding-top: 10rem; /* Ensure padding is sufficient for very small screens too */
+            }
+
             .main-nav {
                 padding: 0.6rem 0.5rem; /* Even smaller padding */
             }
@@ -1162,7 +1171,7 @@
             orgBEMTitle: "学部学生執行委員会 (BEM) メンバー",
             orgBEMRole: "学生組織連絡部門長を務める",
             orgBEMDates: "2019-2020",
-            orgBEMDesc: "様々な学生活動を主導・調整し、組織力、コミュニケーション能力、イベント管理能力を向上。",
+            orgBEMDesc: "Memimpin dan mengkoordinasikan berbagai kegiatan mahasiswa, meningkatkan kemampuan organisasi, komunikasi, dan manajemen acara.",
             languageSkillsTitle: "語学力",
             langIndonesian: "インドネシア語",
             langEnglish: "英語",
