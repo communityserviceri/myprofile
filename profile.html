@@ -48,7 +48,12 @@
             overflow-x: hidden;
             font-family: 'Open Sans', sans-serif; /* Body font */
             transition: background-color 0.3s ease, color 0.3s ease;
-            padding-top: 5.5rem; /* Default padding for desktop navbar height */
+            /* padding-top: 5.5rem; REMOVED */
+        }
+
+        /* Add scroll-padding-top to html for smooth scrolling to anchor links */
+        html {
+            scroll-padding-top: 5.5rem; /* Adjust this value based on your navbar's height */
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -71,51 +76,59 @@
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .main-nav ul {
-            display: flex;
+        .nav-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+            gap: 0.5rem; /* Reduced gap for compactness */
+            flex-grow: 1;
+            justify-content: flex-start;
             list-style: none;
             padding: 0;
-            margin: 0;
-            flex-grow: 1; /* Allow links to take available space */
-            justify-content: flex-start; /* Align links to the left */
+            margin: 0; /* Ensure no default margin */
         }
 
-        .main-nav li {
-            margin: 0 1.2rem; /* Consistent spacing */
+        .nav-links-grid li {
+            margin: 0; /* Remove default margin */
         }
 
-        .main-nav a {
+        .nav-links-grid a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            padding: 0.6rem 0; /* Padding only top/bottom, width determined by content */
-            transition: all 0.2s ease-out; /* Faster, snappier transition */
+            padding: 0.6rem 0.8rem; /* Adjusted padding for button-like appearance */
+            transition: all 0.3s ease-out; /* Smoother transition */
             position: relative;
-            font-size: 1.0rem; /* Slightly smaller for a more refined look */
-            letter-spacing: 0.2px; /* Reduced letter spacing */
-            opacity: 0.9; /* Slightly transparent by default */
+            font-size: 0.95rem; /* Slightly smaller for a minimal look */
+            letter-spacing: 0.2px;
+            opacity: 0.9;
+            display: block; /* Make links fill the grid cell */
+            text-align: center;
+            border-radius: 5px; /* Rounded corners for buttons */
+            background-color: rgba(255,255,255,0.05); /* Subtle background */
+            border: 1px solid rgba(255,255,255,0.1); /* Subtle border */
         }
 
-        .main-nav a:hover {
-            background: none; /* Remove background on hover for cleaner look */
-            transform: translateY(-1px); /* Subtle lift */
-            opacity: 1; /* Fully opaque on hover */
+        .nav-links-grid a:hover {
+            background-color: rgba(255,255,255,0.15); /* More opaque on hover */
+            transform: translateY(-2px) scale(1.02); /* More pronounced lift and slight scale */
+            opacity: 1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Subtle shadow on hover */
         }
 
-        .main-nav a::after {
+        .nav-links-grid a::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 2px; /* Thinner underline */
-            bottom: -4px; /* Closer to text */
+            height: 2px;
+            bottom: 0; /* Underline at the bottom of the button */
             left: 50%;
             transform: translateX(-50%);
             background-color: var(--accent);
-            transition: width 0.2s ease-out; /* Faster transition */
+            transition: width 0.3s ease-out;
         }
 
-        .main-nav a:hover::after {
-            width: 100%; /* Full width underline on hover */
+        .nav-links-grid a:hover::after {
+            width: 80%; /* Underline fills most of the button width */
         }
 
         /* Language Switcher & Theme Toggle (Revised) */
@@ -173,6 +186,7 @@
             border-bottom-left-radius: 50px; /* Rounded corners */
             border-bottom-right-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Stronger shadow */
+            margin-top: 5.5rem; /* Add margin-top to push it down from fixed navbar */
         }
         
         .animated-header::before {
@@ -561,21 +575,38 @@
         
         /* --- Responsive (Revised) --- */
         @media (max-width: 992px) { /* Added a new breakpoint for larger tablets */
-            .main-nav li {
-                margin: 0 0.8rem;
+            .nav-links-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+                gap: 0.4rem;
             }
-            .main-nav a {
-                font-size: 0.95rem;
+            .nav-links-grid a {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.6rem;
             }
             .nav-controls {
                 margin-left: 1rem;
                 gap: 0.6rem;
             }
+            html {
+                scroll-padding-top: 5.5rem; /* Keep consistent for desktop/tablet */
+            }
+            .animated-header {
+                margin-top: 5.5rem; /* Keep consistent for desktop/tablet */
+            }
         }
 
         @media (max-width: 768px) {
             body {
-                padding-top: 10rem; /* Increased padding for mobile navbar height */
+                /* padding-top: 10rem; REMOVED */
+            }
+            html {
+                scroll-padding-top: 10rem; /* Adjust for mobile navbar height */
+            }
+            .animated-header {
+                margin-top: 10rem; /* Adjust for mobile navbar height */
+                padding: 6rem 1.5rem 3rem;
+                border-bottom-left-radius: 30px;
+                border-bottom-right-radius: 30px;
             }
 
             .main-nav {
@@ -583,17 +614,14 @@
                 padding: 0.75rem 1rem; /* Reduced horizontal padding */
                 align-items: stretch; /* Stretch to fill width */
             }
-            .main-nav ul {
-                flex-wrap: wrap;
-                justify-content: center; /* Center links when wrapped */
+            .nav-links-grid {
+                grid-template-columns: repeat(3, 1fr); /* 3 columns on smaller screens */
+                gap: 0.5rem;
                 margin-bottom: 0.75rem; /* Space between nav links and controls */
             }
-            .main-nav li {
-                margin: 0.4rem 0.6rem; /* Adjusted margin for smaller screens */
-            }
-            .main-nav a {
-                font-size: 0.9rem;
-                padding: 0.5rem 0; /* Keep padding vertical only */
+            .nav-links-grid a {
+                font-size: 0.85rem;
+                padding: 0.5rem 0.4rem;
             }
             .nav-controls {
                 position: static; /* Allow controls to flow naturally */
@@ -609,11 +637,6 @@
                 font-size: 0.85rem;
             }
 
-            .animated-header {
-                padding: 6rem 1.5rem 3rem;
-                border-bottom-left-radius: 30px;
-                border-bottom-right-radius: 30px;
-            }
             .profile-pic {
                 width: 140px;
                 height: 140px;
@@ -691,17 +714,25 @@
 
         @media (max-width: 480px) {
             body {
-                padding-top: 10rem; /* Ensure padding is sufficient for very small screens too */
+                /* padding-top: 10rem; REMOVED */
+            }
+            html {
+                scroll-padding-top: 10rem; /* Keep consistent for very small screens too */
+            }
+            .animated-header {
+                margin-top: 10rem; /* Keep consistent for very small screens too */
             }
 
             .main-nav {
                 padding: 0.6rem 0.5rem; /* Even smaller padding */
             }
-            .main-nav li {
-                margin: 0.3rem 0.4rem;
+            .nav-links-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on very small screens */
+                gap: 0.4rem;
             }
-            .main-nav a {
-                font-size: 0.8rem;
+            .nav-links-grid a {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.3rem;
             }
             .nav-controls {
                 flex-direction: row; /* Keep controls in a row if space allows */
@@ -718,7 +749,7 @@
 <body>
     <div class="scroll-progress"></div>
     <nav class="main-nav">
-        <ul>
+        <ul class="nav-links-grid">
             <li><a href="#profil" data-lang-key="navProfile">Profil</a></li>
             <li><a href="#pendidikan" data-lang-key="navEducation">Pendidikan</a></li>
             <li><a href="#pengalaman-kerja" data-lang-key="navExperience">Pengalaman</a></li>
@@ -757,13 +788,13 @@
 
     <section id="profil">
         <h2 data-lang-key="profileTitle">Profil</h2>
-        <p data-lang-key="profileDesc1">Bima Adhitya Susilo Putra adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, Bima memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, ia dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.</p>
+        <p data-lang-key="profileDesc1">Saya, Bima Adhitya Susilo Putra, adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, saya memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, saya dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.</p>
         <br>
         <p><strong data-lang-key="fullNameLabel">Nama Lengkap:</strong> <span data-lang-key="fullNameValue">Bima Adhitya Susilo Putra</span></p>
         <p><strong data-lang-key="nicknameLabel">Nama Panggilan:</strong> <span data-lang-key="nicknameValue">Hiro / Bima</span></p>
         <p><strong data-lang-key="dobLabel">Tempat, Tanggal Lahir:</strong> <span data-lang-key="dobValue">Garut, 16 Juni 2001</span></p>
         <p><strong data-lang-key="originCityLabel">Asal Kota:</strong> <span data-lang-key="originCityValue">Garut</span></p>
-        <p><strong data-lang-key="currentResidenceLabel">Tinggal (saat ini):</strong> <span data-lang-key="currentResidenceValue">Jakarta Selatan</span></p>
+        <p><strong data-lang-key="currentResidenceLabel">Tinggal (saat ini):</strong data-lang-key="currentResidenceValue"> <span data-lang-key="currentResidenceValue">Jakarta Selatan</span></p>
     </section>
 
     <section id="pendidikan">
@@ -924,7 +955,7 @@
             navLanguageSkills: "Keahlian Bahasa",
             headerSubtitle: "Profesional IT | Spesialis Jaringan & Data Center | Inovator Bersemangat",
             profileTitle: "Profil",
-            profileDesc1: "Bima Adhitya Susilo Putra adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, Bima memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, ia dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.",
+            profileDesc1: "Saya, Bima Adhitya Susilo Putra, adalah seorang profesional IT yang berdedikasi dengan latar belakang kuat di bidang Teknik Informatika. Berpengalaman dalam manajemen infrastruktur IT, jaringan, dan pengembangan sistem, saya memiliki minat mendalam terhadap inovasi teknologi dan pemecahan masalah. Berasal dari Garut, saya dikenal sebagai individu yang proaktif, mudah beradaptasi, dan memiliki semangat tinggi dalam belajar hal baru.",
             fullNameLabel: "Nama Lengkap:",
             fullNameValue: "Bima Adhitya Susilo Putra",
             nicknameLabel: "Nama Panggilan:",
@@ -1015,7 +1046,7 @@
             navLanguageSkills: "Language Skills",
             headerSubtitle: "IT Professional | Network & Data Center Specialist | Passionate Innovator",
             profileTitle: "Profile",
-            profileDesc1: "Bima Adhitya Susilo Putra is a dedicated IT professional with a strong background in Informatics Engineering. Experienced in IT infrastructure management, networking, and system development, Bima has a deep interest in technological innovation and problem-solving. Hailing from Garut, he is known as a proactive, adaptable individual with a high spirit for learning new things.",
+            profileDesc1: "I, Bima Adhitya Susilo Putra, am a dedicated IT professional with a strong background in Informatics Engineering. Experienced in IT infrastructure management, networking, and system development, I have a deep interest in technological innovation and problem-solving. Hailing from Garut, I am known as a proactive, adaptable individual with a high spirit for learning new things.",
             fullNameLabel: "Full Name:",
             fullNameValue: "Bima Adhitya Susilo Putra",
             nicknameLabel: "Nickname:",
@@ -1106,7 +1137,7 @@
             navLanguageSkills: "語学力",
             headerSubtitle: "ITプロフェッショナル | ネットワーク＆データセンター専門家 | 情熱的なイノベーター",
             profileTitle: "プロフィール",
-            profileDesc1: "ビマ・アディティア・スシロ・プトラは、情報工学の強力なバックグラウンドを持つ献身的なITプロフェッショナルです。ITインフラ管理、ネットワーキング、システム開発の経験を持ち、技術革新と問題解決に深い関心を持っています。ガルト出身で、積極的で適応力があり、新しいことを学ぶ意欲が高い人物として知られています。",
+            profileDesc1: "私、ビマ・アディティア・スシロ・プトラは、情報工学の強力なバックグラウンドを持つ献身的なITプロフェッショナルです。ITインフラ管理、ネットワーキング、システム開発の経験を持ち、技術革新と問題解決に深い関心を持っています。ガルト出身で、私は積極的で適応力があり、新しいことを学ぶ意欲が高い人物として知られています。",
             fullNameLabel: "氏名:",
             fullNameValue: "ビマ・アディティア・スシロ・プトラ",
             nicknameLabel: "ニックネーム:",
@@ -1178,7 +1209,7 @@
             langJapanese: "日本語",
             langSundanese: "スンダ語 (地域)",
             hobbiesTitle: "趣味＆興味",
-            hobbyMotorTitle: "趣味:",
+            hobbyMotorTitle: "Hobi:",
             hobbyMotorDesc: "バイク＆自動車 (細部へのこだわり、機械的問題解決、複雑なシステムの理解を示す)",
             interestTechTitle: "Minat:",
             interestTechDesc: "テクノロジー、科学、自動車 (継続的な学習と革新への適応を促す)",
@@ -1252,8 +1283,8 @@
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80, // Adjusted for fixed nav height
+                // The scroll-padding-top on html will handle the offset
+                target.scrollIntoView({
                     behavior: 'smooth'
                 });
             }
